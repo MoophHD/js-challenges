@@ -3,6 +3,7 @@
 function countNeighbours( _data, y, x, range=1 ) {
   // create a copy
   let data = _data.slice();
+  // don't count the "1" under at the start coords
   const underStart = data[y][x];
   const len = {
     y: data.length,
@@ -25,6 +26,8 @@ function countNeighbours( _data, y, x, range=1 ) {
       )
   }
 
+  // flatten the 2d array into 1d
   var flattenedData = [].concat(...data);
+  // get the number of "1"s
   return flattenedData.filter(a => a).length - underStart;
 }
