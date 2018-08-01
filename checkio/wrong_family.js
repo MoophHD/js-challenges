@@ -3,16 +3,20 @@
 function isFamily(tree) {
     let t = {};
     
-    tree.forEach( tie => {
+    for (let i = 0; i < tree.length; i++) {
+        let tie = tree[i];
+
         let pap = tie[0];
         let son = tie[1];
-
+        // father of your father
+        if (t[son] == pap) return false;
         if (!t.hasOwnProperty(pap)) t[pap] = [];
         t[pap].push(son);
 
         if (!t.hasOwnProperty(son)) t[son] = [];
-    })
+    }
 
+    console.log(t)
     // sort by number of children
     let tKeys = Object.keys(t).sort((a, b) => t[a].length - t[b].length);
     
@@ -40,7 +44,4 @@ function isFamily(tree) {
         }
     }
     return fatherless == 1;
-    
-
 }
-
