@@ -20,7 +20,7 @@ function isFamily(tree) {
     mainLoop: for (let i = 0; i < tKeys.length; i++) {
         let sonNm = tKeys[i];
 
-        // look for the father & iterating through the whole list to avoid pap-grandson incest
+        // look for the father
         let farCount = 0;
         for (let j = 0; j < tKeys.length; j++) {
             if (j == i && j != tKeys.length - 1) continue;
