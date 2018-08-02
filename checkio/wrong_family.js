@@ -3,16 +3,20 @@
 function isFamily(tree) {
     let t = {};
     
-    tree.forEach( tie => {
+    for (let i = 0; i < tree.length; i++) {
+        let tie = tree[i];
+
         let pap = tie[0];
         let son = tie[1];
-
+        // father of your father
+        if (t[son] == pap) return false;
         if (!t.hasOwnProperty(pap)) t[pap] = [];
         t[pap].push(son);
 
         if (!t.hasOwnProperty(son)) t[son] = [];
-    })
+    }
 
+    console.log(t)
     // sort by number of children
     let tKeys = Object.keys(t).sort((a, b) => t[a].length - t[b].length);
     
@@ -20,7 +24,7 @@ function isFamily(tree) {
     mainLoop: for (let i = 0; i < tKeys.length; i++) {
         let sonNm = tKeys[i];
 
-        // look for the father & iterating through the whole list to avoid pap-grandson incest
+        // look for the father
         let farCount = 0;
         for (let j = 0; j < tKeys.length; j++) {
             if (j == i && j != tKeys.length - 1) continue;
@@ -40,7 +44,4 @@ function isFamily(tree) {
         }
     }
     return fatherless == 1;
-    
-
 }
-
