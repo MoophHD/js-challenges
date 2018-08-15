@@ -9,7 +9,7 @@ function symmetric(matrix) {
     for (let j = i + 1; j < matrix.length; j++) {
       let ij = matrix[i][j];
       let ji = matrix[j][i];
-
+      
       if (ij == ji && ij == 0) continue;
       if (ij / ji != -1) return false;
     }
