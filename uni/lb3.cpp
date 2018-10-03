@@ -1,9 +1,6 @@
 ﻿#include <iostream>
 #include <math.h>
 #include <iomanip>
-#include <string>
-#include <limits>
-
 
 using namespace std;
 
@@ -16,52 +13,44 @@ int fact(int till) {
 
         result *= i;
     }
-
     return result;
 }
 
-double safeDblPrompt(string message) {
-    double input;
-
-    cout << message;
-    while(!(cin >> input)) {
-        cout << "Bad value!" << endl;
-        cout << message;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-
-    return input;
-}   
 
 int main() {
-    double x, from, to, step, funS, funY;
+    double x, from, to, step, steps, funS, funY;
     int n,i;
-    
-    // from = 0.1;
-    // to = 1;
-    // step = (to - from) / 10;
 
+    // cout << "Enter From: ";
+    //     cin >> from;
+    // cout << "Enter To: ";
+    //     cin >> to;
+    // cout << "Enter Steps: ";
+    //     cin >> steps;
 
-    from = safeDblPrompt("enter FROM: ");
-    to = safeDblPrompt("enter TO: ");
+    from = 0.1;
+    to = 1;
+    steps = 10;
 
     if (from >= to) {
         cout << "FROM has to contain value smaller than TO";
         return -1;
     }
 
-    step = (to - from) / 10;
-    n = 50;
+    step = (to - from) / steps;
+    n = 80;
     x = from;
     while (x <= to) {
-        funY = (exp(x) - exp(-x)) * 0.5;
+        funS = (exp(x) - exp(-x)) * 0.5;
 
-        funS = 1;
+        funY = 1;
         for (i = 0; i < n; i++) {
-            funS += pow(x, 2 * i + 1);
+            int factorial = fact(2*i + 1);
+            if (factorial > 0) {
+                funY += (pow(x, 2 * i + 1) / factorial);
+            }
+            
         }
-        
         
     cout << "x: " << fixed << x << setw(10)
     << "y(x): " << funY << setw(10) 
